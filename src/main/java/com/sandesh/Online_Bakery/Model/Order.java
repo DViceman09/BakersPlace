@@ -1,0 +1,47 @@
+package com.sandesh.Online_Bakery.Model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name= "orders")
+public class Order {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long order_id;
+
+    @ManyToOne
+    private UserEntity customer;
+
+    @JsonIgnore
+    @ManyToOne
+    private Restaurant restaurant;
+
+    private Long total_amount;
+
+    private String order_status;
+
+    private Date date;
+
+    @ManyToOne
+    private Address delivery_address;
+
+    @OneToMany
+    private List<OrderItems> items;
+
+    private int totalItems;
+
+    private int total_price;
+
+//    private Payment payment;
+}
