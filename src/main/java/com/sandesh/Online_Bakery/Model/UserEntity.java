@@ -20,13 +20,13 @@ public class UserEntity {
     @Id
     private Long user_id;
 
-    private String user_name;
+    private String username;
 
     private String email;
 
     private String password;
 
-    private USER_ROLE role;
+    private USER_ROLE role = USER_ROLE.ROLE_CUSTOMER;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     @JsonIgnore

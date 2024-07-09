@@ -8,8 +8,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
@@ -36,6 +39,8 @@ public class JwtTokenValidator extends OncePerRequestFilter
                     String authority = String.valueOf(claims.get("authority"));
 
                     List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(authority);
+                    Authentication authentication = new UsernamePasswordAuthenticationToken(email, null ,auth);
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
                 catch (Exception e) {
                     throw new BadCredentialsException(("invalid token"));
