@@ -27,7 +27,7 @@ public class AppConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                        .authorizeHttpRequests(Authorize -> Authorize
                                .requestMatchers("/api/admin/**")
-                               .hasAnyRole("BAKERY_OWNER","ADMIN")
+                               .hasAnyRole("OWNER","ADMIN")
                                .requestMatchers("/api/**").authenticated().anyRequest().permitAll())
                        .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class).csrf(csrf -> csrf.disable())
                        .cors(cors -> cors.configurationSource(corsConfigurationSource()));

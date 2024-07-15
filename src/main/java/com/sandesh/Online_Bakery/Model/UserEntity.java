@@ -19,7 +19,7 @@ public class UserEntity {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Long user_id;
+    private Long id;
 
     private String username;
 

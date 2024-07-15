@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 public class ContactInformation {
     private String mobile_number;
     private String email_id;
+    private String twitter;
+    private String instagram;
 }
