@@ -4,7 +4,7 @@ package com.sandesh.Online_Bakery.Controller;
 import com.sandesh.Online_Bakery.Model.Cart;
 import com.sandesh.Online_Bakery.Model.USER_ROLE;
 import com.sandesh.Online_Bakery.Model.UserEntity;
-import com.sandesh.Online_Bakery.Repository.CartRepo;
+import com.sandesh.Online_Bakery.Repository.CartRepository;
 import com.sandesh.Online_Bakery.Repository.UserRepo;
 import com.sandesh.Online_Bakery.Requests.LoginRequest;
 import com.sandesh.Online_Bakery.Response.AuthResponse;
@@ -40,7 +40,7 @@ public class AuthorizationController {
     private JwtProvider jwtProvider;
 
     @Autowired
-    private CartRepo cartRepo;
+    private CartRepository cartRepo;
 
     @Autowired
     private CustomerUserDetailsService customerUserDetailsService;

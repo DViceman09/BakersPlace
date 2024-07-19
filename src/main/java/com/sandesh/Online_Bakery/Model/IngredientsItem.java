@@ -1,3 +1,4 @@
+/*
 package com.sandesh.Online_Bakery.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,3 +27,5 @@ public class IngredientsItem {
 
     private boolean isStock = true;
 }
+*/
+

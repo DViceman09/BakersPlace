@@ -1,3 +1,4 @@
+/*
 package com.sandesh.Online_Bakery.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,3 +28,5 @@ public class IngredientCategory {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<IngredientsItem> ingredients = new ArrayList<>();
 }
+*/
+

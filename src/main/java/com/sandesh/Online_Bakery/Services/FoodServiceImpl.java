@@ -30,7 +30,7 @@ public class FoodServiceImpl implements FoodService {
         food.setFood_name(req.getName());
         food.setImages(req.getImages());
         food.setPrice(req.getPrice());
-        food.setIngredients(req.getItems());
+//        food.setIngredients(req.getItems());
         food.setSeasonal(req.isSeasonal());
         food.setVeg(req.isVeg());
 

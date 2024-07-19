@@ -1,7 +1,7 @@
 package com.sandesh.Online_Bakery.Requests;
 
 import com.sandesh.Online_Bakery.Model.Category;
-import com.sandesh.Online_Bakery.Model.IngredientsItem;
+//import com.sandesh.Online_Bakery.Model.IngredientsItem;
 import lombok.Data;
 
 import java.util.List;
@@ -16,5 +16,5 @@ public class CreateFoodRequest {
     private Long restaurantId;
     private boolean isVeg;
     private boolean isSeasonal;
-    private List<IngredientsItem> items;
+//    private List<IngredientsItem> items;
 }

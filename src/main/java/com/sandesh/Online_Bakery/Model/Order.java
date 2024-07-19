@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Order {
 
     private Long total_amount;
 
-    private String order_status;
+    private String orderStatus;
 
     private Date date;
 
@@ -41,7 +42,9 @@ public class Order {
 
     private int totalItems;
 
-    private int total_price;
+    private Long total_price;
+
+    private LocalDateTime createdAt;
 
 //    private Payment payment;
 }

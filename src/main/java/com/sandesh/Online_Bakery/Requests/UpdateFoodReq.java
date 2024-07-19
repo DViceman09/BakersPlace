@@ -1,7 +1,7 @@
 package com.sandesh.Online_Bakery.Requests;
 
 import com.sandesh.Online_Bakery.Model.Category;
-import com.sandesh.Online_Bakery.Model.IngredientsItem;
+//import com.sandesh.Online_Bakery.Model.IngredientsItem;
 import lombok.Data;
 
 import java.util.List;
@@ -12,5 +12,5 @@ public class UpdateFoodReq {
     private String description;
     private Long price;
     private List<String> images;
-    private boolean isVeg;;
+    private boolean isVeg;
 }
