@@ -41,9 +41,10 @@ public class AppConfig {
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration cfg = new CorsConfiguration();
                 cfg.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
-                cfg.setAllowedOrigins(Collections.singletonList("*"));
+                cfg.addAllowedOriginPattern(("*"));
                 cfg.setAllowCredentials(true);
-                cfg.setAllowedHeaders(Collections.singletonList("*"));
+                cfg.addAllowedHeader(("*"));
+                cfg.addAllowedMethod(("*"));
                 cfg.setExposedHeaders(Arrays.asList("Authorization"));
                 cfg.setMaxAge(3600L);
                 return cfg;
