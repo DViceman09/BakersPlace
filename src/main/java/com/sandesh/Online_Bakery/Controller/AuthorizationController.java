@@ -81,10 +81,10 @@ public class AuthorizationController {
     @PostMapping("/signin")
     public ResponseEntity<AuthResponse> Signin(@RequestBody LoginRequest loginRequest)
     {
-        String username = loginRequest.getEmail();
+        String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 
-        Authentication authentication = authenticate(username, password);
+        Authentication authentication = authenticate(email, password);
 
         Collection<?extends GrantedAuthority> authority = authentication.getAuthorities();
 
@@ -94,7 +94,7 @@ public class AuthorizationController {
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setJwt(jwt);
-        authResponse.setMessage("Register Successful");
+        authResponse.setMessage("Login Successful");
         authResponse.setRole(USER_ROLE.valueOf(role));
 
         return new ResponseEntity<>(authResponse, HttpStatus.OK);
