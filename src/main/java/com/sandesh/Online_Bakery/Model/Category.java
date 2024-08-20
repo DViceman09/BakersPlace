@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.misc.NotNull;
 @AllArgsConstructor
 public class Category {
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long food_id;

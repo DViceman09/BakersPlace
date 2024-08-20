@@ -25,7 +25,7 @@ public class Food {
 
     private Long price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Category foodCategory;
 
     @Column(length = 1000)
@@ -40,9 +40,6 @@ public class Food {
     private boolean isVeg;
 
     private boolean isSeasonal;
-
-//    @ManyToMany
-//    private List<IngredientsItem> ingredients = new ArrayList<>();
 
     private Date creationDate;
 
