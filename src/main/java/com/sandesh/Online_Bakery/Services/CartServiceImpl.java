@@ -29,6 +29,7 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private FoodService foodService;
 
+
     @Override
     public CartItem addItemToCart(AddCartItemRequest req, String jwt) throws Exception {
         UserEntity user = userService.findUserByJwtToken(jwt);
@@ -52,7 +53,7 @@ public class CartServiceImpl implements CartService {
         CartItem savedCart = cartItemRepository.save(cartItem);
 
         cart.getItem().add(savedCart);
-
+        cartRepository.save(cart);
         return savedCart;
     }
 
