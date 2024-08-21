@@ -18,11 +18,12 @@ public class Cart {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "customer_id")
     private UserEntity customer;
 
     private Long total;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> item= new ArrayList<>();
+    private List<CartItem> item = new ArrayList<>();
     }
 
