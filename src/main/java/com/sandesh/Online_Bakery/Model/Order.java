@@ -28,11 +28,9 @@ public class Order {
     @ManyToOne
     private Restaurant restaurant;
 
-    private Long total_amount;
+    private Long amount;
 
     private String orderStatus;
-
-    private Date date;
 
     @ManyToOne
     private Address delivery_address;
