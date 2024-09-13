@@ -1,12 +1,12 @@
 package com.sandesh.Online_Bakery.configurations;
 
-
+import com.sandesh.Online_Bakery.configurations.JwtTokenValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer.AuthorizedUrl;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,29 +22,31 @@ import java.util.Collections;
 @EnableWebSecurity
 public class AppConfig {
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-               http.sessionManagement(management -> management
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                       .authorizeHttpRequests(Authorize -> Authorize
-                               .requestMatchers("/api/admin/**")
-                               .hasAnyRole("OWNER","ADMIN")
-                               .requestMatchers("/api/**").authenticated().anyRequest().permitAll())
-                       .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class).csrf(csrf -> csrf.disable())
-                       .cors(cors -> cors.configurationSource(corsConfigurationSource()));
-        return http.build();
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.sessionManagement((management) -> {
+            management.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        }).authorizeHttpRequests((Authorize) -> {
+            ((AuthorizedUrl)((AuthorizedUrl)((AuthorizedUrl)Authorize.requestMatchers(new String[]{"/api/admin/**"})).hasAnyRole(new String[]{"OWNER", "ADMIN"}).requestMatchers(new String[]{"/api/**"})).authenticated().anyRequest()).permitAll();
+        }).addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class).csrf((csrf) -> {
+            csrf.disable();
+        }).cors((cors) -> {
+            cors.configurationSource(this.corsConfigurationSource());
+        });
+        return (SecurityFilterChain)http.build();
     }
 
-    private CorsConfigurationSource corsConfigurationSource()
-    {
+    private CorsConfigurationSource corsConfigurationSource() {
         return new CorsConfigurationSource() {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration cfg = new CorsConfiguration();
-                cfg.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
-                cfg.addAllowedOriginPattern(("*"));
+                cfg.setAllowedOrigins(Arrays.asList(
+                        "http://localhost:3000",
+                        "http://localhost:8080"
+                ));
+                cfg.setAllowedMethods(Collections.singletonList("*"));
                 cfg.setAllowCredentials(true);
-                cfg.addAllowedHeader(("*"));
-                cfg.addAllowedMethod(("*"));
+                cfg.setAllowedHeaders(Collections.singletonList("*"));
                 cfg.setExposedHeaders(Arrays.asList("Authorization"));
                 cfg.setMaxAge(3600L);
                 return cfg;
@@ -53,8 +55,7 @@ public class AppConfig {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder()
-    {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

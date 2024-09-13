@@ -23,6 +23,4 @@ public class OrderItems {
     private int quantity;
 
     private Long total_price;
-
-    private List<String> ingredients = new ArrayList<>();
 }

@@ -25,7 +25,7 @@ public class Food {
 
     private Long price;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Category foodCategory;
 
     @Column(length = 1000)

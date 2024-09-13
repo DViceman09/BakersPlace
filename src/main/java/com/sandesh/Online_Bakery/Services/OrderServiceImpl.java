@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService{
 
         Order createdOrder = new Order();
         createdOrder.setCustomer(user);
-        createdOrder.setCreatedAt(LocalDateTime.now());
+        createdOrder.setCreatedAt(new Date());
         createdOrder.setOrderStatus("PENDING");
         createdOrder.setDelivery_address(savedAddress);
         createdOrder.setRestaurant(restaurant);
@@ -108,9 +108,10 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<Order> getRestaurantOrders(Long restaurantId, String orderStatus) throws Exception {
         List<Order> orders = orderRepository.findOrderByRestaurantRestaurantId(restaurantId);
-        if(orderStatus!= null)
-        {
-            orders = orders.stream().filter(order -> order.getOrderStatus().equals(orderStatus)).toList();
+        if(orderStatus!=null) {
+            orders = orders.stream()
+                    .filter(order->order.getOrderStatus().equals(orderStatus))
+                    .collect(Collectors.toList());
         }
         return orders;
     }

@@ -13,33 +13,31 @@ import java.util.*;
 @Service
 public class JwtProvider {
 
-    private SecretKey key = Keys.hmacShaKeyFor(JWTConstants.SECRET_KEY.getBytes());
-    public String generateToken(Authentication auth) {
-        Collection<?extends GrantedAuthority> authority = auth.getAuthorities();
-        String roles = populateAuthorities(authority);
+    private SecretKey key = Keys.hmacShaKeyFor("fiugndofnkgsdofjbgojaddisajbfojsgpksdnagpkabfogjisfbgsjifogboafuibgoaifn".getBytes());
 
-        String jwt = Jwts.builder().issuedAt(new Date())
-                .setExpiration((new Date(new Date().getTime()+ 86400000)))
-                .claim("email", auth.getName())
-                .claim("authority", roles)
-                .signWith(key).compact();
+    public String generateToken(Authentication auth) {
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        String roles = this.populateAuthorities(authorities);
+        String jwt = Jwts.builder().setIssuedAt(new Date()).setExpiration(new Date((new Date()).getTime() + 86400000000L)).claim("email", auth.getName()).claim("authorities", roles).signWith(this.key).compact();
         return jwt;
     }
 
-    public String getEmailFromJWTToken(String jwt)
-    {
+    public String getEmailFromJwtToken(String jwt) {
         jwt = jwt.substring(7);
-        Claims claims = Jwts.parser().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-
+        Claims claims = (Claims)Jwts.parser().setSigningKey(this.key).build().parseClaimsJws(jwt).getBody();
         String email = String.valueOf(claims.get("email"));
         return email;
     }
 
-    private String populateAuthorities(Collection<?extends GrantedAuthority> authority) {
-        Set<String> authorities = new HashSet<>();
-        for(GrantedAuthority grantedAuthority : authority) {
-            authorities.add(grantedAuthority.getAuthority());
+    public String populateAuthorities(Collection<? extends GrantedAuthority> collection) {
+        Set<String> auths = new HashSet();
+        Iterator var3 = collection.iterator();
+
+        while(var3.hasNext()) {
+            GrantedAuthority authority = (GrantedAuthority)var3.next();
+            auths.add(authority.getAuthority());
         }
-        return String.join(",", authorities);
+
+        return String.join(",", auths);
     }
 }

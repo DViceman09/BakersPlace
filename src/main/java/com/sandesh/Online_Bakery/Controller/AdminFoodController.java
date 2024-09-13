@@ -44,9 +44,9 @@ public class AdminFoodController {
         foodService.deleteFood(id);
 
         MessageResponse res = new MessageResponse();
-        res.setMessage("Food created successfully");
+        res.setMessage("Food deleted successfully");
 
-        return new ResponseEntity<>(res , HttpStatus.CREATED);
+        return new ResponseEntity<>(res,HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

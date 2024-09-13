@@ -42,7 +42,8 @@ public class Order {
 
     private Long total_price;
 
-    private LocalDateTime createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
 //    private Payment payment;
 }
